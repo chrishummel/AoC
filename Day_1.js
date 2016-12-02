@@ -1,16 +1,16 @@
 // Part 1
 function distance(distanceStr) {
-    let distanceArr = distanceStr.split(', ');
+    const distanceArr = distanceStr.split(', ');
     const facingMap = [[0,1],[1,0],[0,-1], [-1,0]]
-    let startingPos = {
+    const startingPos = {
         position: [0,0],
         facingMapIdx: 0
     }
-    let positionObj = distanceArr.reduce(function(pos, instruc) {
-        var currentPos = pos.position;
+    const positionObj = distanceArr.reduce(function(pos, instruc) {
+        const currentPos = pos.position;
         let currentFacing = pos.facingMapIdx
-        let turnDir = instruc.substr(0,1);
-        let turnDist = Number(instruc.substr(1));
+        const turnDir = instruc.substr(0,1);
+        const turnDist = Number(instruc.substr(1));
         
         currentFacing = (turnDir === 'R') ? currentFacing + 1 : currentFacing -1
         if (currentFacing === -1) {
@@ -19,7 +19,7 @@ function distance(distanceStr) {
             currentFacing = 0;
         }
 
-        var move = facingMap[currentFacing].map( x => x * turnDist )
+        const move = facingMap[currentFacing].map( x => x * turnDist )
 
         currentPos[0] += move[0];
         currentPos[1] += move[1];
