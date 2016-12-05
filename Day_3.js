@@ -1,6 +1,18 @@
+'use strict'
+
 function possibleTriangle(list) {
   let triangleArr = list.split('\n').map(x => x.split(' ')).map(y => y.filter(x => (x !== '')))
-  console.log(triangleArr)
+  let filtered = triangleArr.filter( function(sides) {
+    sides.sort((x,y) => x - y)
+    if (Number(sides[0]) + Number(sides[1]) > Number(sides[2])) {
+      return true
+    } else {
+      return false
+    }
+  })
+
+  return filtered.length
+
 }
 
 let result = possibleTriangle(

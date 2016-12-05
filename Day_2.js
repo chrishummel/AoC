@@ -1,3 +1,5 @@
+'use strict'
+
 function calcCode(instructions) {
 	let x = 1, y = 1;
 	const directionsArr = instructions.split('\n').map(x => x.split(''))

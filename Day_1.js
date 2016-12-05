@@ -1,3 +1,4 @@
+'use strict'
 // Part 1
 function distance(distanceStr) {
     const distanceArr = distanceStr.split(', ');
