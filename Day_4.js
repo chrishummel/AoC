@@ -12,12 +12,14 @@ function countLetters(string) {
 }
 
 function formatIndividualInput(string) {
+  let original = string.replace(/\d|]/g, '').split('[')
+  let originalString = original[0]
   let sectorId = Number(string.match(/\d/g).join(''))
   let splitArr = string.replace(/-|\d|]/g,'').split('[')
   let encryptedString = splitArr[0]
   let checksum = splitArr[1]
 
-  return { sectorId, encryptedString, checksum }
+  return { sectorId, encryptedString, checksum, originalString }
 }
 
 function sortObject(obj) {
@@ -37,7 +39,7 @@ function sortObject(obj) {
 
 //Part 1
 
-function decrypt() {
+function decrypt(callback) {
   let sum = 0
   fs.readFile('./Day_4.txt', 'utf-8', part1)
 
@@ -50,17 +52,44 @@ function decrypt() {
 
     realChecksum.forEach(function(obj) {
       if (obj.checksum === obj.actualChecksum.slice(0,5)) {
+        obj.realRoom = true;
         sum += obj.sectorId
       }
     })
 
-    console.log('Part 1 Answer: ', sum)
+    callback ? callback(realChecksum) : console.log('Part 1 Answer: ', sum)
   
-  }
-
+  }   
 }
 
-decrypt()
+//decrypt()
+
+//Part 2
+
+decrypt(part2)
+
+function part2(roomObjs) {
+  let filtered = roomObjs.filter( room => room.realRoom)
+  let answer = filtered.map(room => {
+    let answerStr = ''
+    let spacedStr = room.originalString.replace(/-/g, ' ')
+    let shiftFactor = room.sectorId%26
+    for(let i=0; i<spacedStr.length; i++) {
+      let currentLetter = spacedStr[i]
+      if (currentLetter === ' ') { 
+        answerStr += ' '
+      } else {
+        let letterIndex = alphaMap.indexOf(currentLetter) + shiftFactor
+        if (letterIndex >= 26 ) letterIndex -= 26;
+        answerStr += alphaMap.charAt(letterIndex)
+      }
+    }
+    return { answerStr, sectorId: room.sectorId }
+  })
+  console.log(answer)
+}
+
+const alphaMap = 'abcdefghijklmnopqrstuvwxyz'
 
 
 
