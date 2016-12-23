@@ -31,6 +31,19 @@ function largestKey(obj) {
 	return largest;
 }
 
+function smallestKey(obj, maxLength) {
+	let smallest = '';
+	let smallestVal = maxLength;
+
+	Object.keys(obj).map(key => {
+		if (obj[key] < smallestVal) {
+			smallest = key;
+			smallestVal = obj[key]
+		}
+	})
+	return smallest;
+}
+
 
 //Part 1
 function fsPart1() {
@@ -45,5 +58,19 @@ function Part1(err, input) {
  }
 
 fsPart1()
+
+//Part 2
+
+function fsPart2() {
+	fs.readFile(__dirname + '/Day_6.txt', 'utf-8', Part2)
+}
+
+function Part1(err, input) {
+	let splitWordArr = input.split('\n')
+	let counts = splitWordArr.reduce((accum, word) => updateCountArr(word, accum), [])
+	let result2 = counts.map(countObj => smallestKey(countObj, splitWordArr.length)).join('')
+	console.log('Part 2 Answer: ', result2)
+ }
+
 
 
