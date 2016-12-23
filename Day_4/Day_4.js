@@ -41,9 +41,10 @@ function sortObject(obj) {
 
 function decrypt(callback) {
   let sum = 0;
-  fs.readFile('./Day_4.txt', 'utf-8', part1)
+  fs.readFile(__dirname + '/Day_4.txt', 'utf-8', part1)
 
   function part1(err, encrypted) {
+    if (err) console.log(err)
     let organized = encrypted.split('\n').map(string => formatIndividualInput(string));
     let realChecksum = organized.map(encryptedObj => {
       encryptedObj.actualChecksum = sortObject(countLetters(encryptedObj.encryptedString));
