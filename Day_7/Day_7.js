@@ -1,6 +1,6 @@
 'use strict'
 
-const promisedFS = require('../promisefs.js');
+const promisedFSreadFile = require('../promisefs.js');
 
 // Part 1
 

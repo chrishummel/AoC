@@ -2,7 +2,7 @@
 
 const fs = require('fs')
 
-let promisedFS  = function(fileDir, encoding) {
+let promisedFSreadFile  = function(fileDir, encoding) {
 	return new Promise(function(resolve, reject) {
 		fs.readFile(fileDir, encoding, function(err, result) {
 			if (err) {
@@ -13,7 +13,7 @@ let promisedFS  = function(fileDir, encoding) {
 	})
 }
 
-module.exports = promisedFS
+module.exports = promisedFSreadFile
 
 
 
