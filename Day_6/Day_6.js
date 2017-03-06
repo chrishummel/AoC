@@ -65,7 +65,7 @@ function fsPart2() {
 	fs.readFile(__dirname + '/Day_6.txt', 'utf-8', Part2)
 }
 
-function Part1(err, input) {
+function Part2(err, input) {
 	let splitWordArr = input.split('\n')
 	let counts = splitWordArr.reduce((accum, word) => updateCountArr(word, accum), [])
 	let result2 = counts.map(countObj => smallestKey(countObj, splitWordArr.length)).join('')
